@@ -2,11 +2,18 @@ DROP TABLE IF EXISTS cart_product;
 DROP TABLE IF EXISTS cart;
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS category;
+
+create table category (
+    id serial primary key,
+    name text not null unique
+);
 
 create table product (
     id serial primary key,
     name text not null,
     description text not null,
+    category_id int references category(id),
     price decimal not null,
     created_at timestamptz not null default now(),
     updated_at timestamptz
@@ -36,11 +43,13 @@ create table cart_product (
     quantity int not null
 );
 
-insert into product(name, description, price) 
+insert into category(name) values ('Laptop'), ('Clothing'), ('Books');
+
+insert into product(name, description, price, category_id) 
 values
-('product 1', 'description 1', 10.0),
-('product 2', 'description 2', 10.0),
-('product 3', 'description 3', 10.0);
+('MacBook Pro', 'Apple laptop', 1500.0, 1),
+('T-shirt', 'Nike T-shirt', 25.0, 2),
+('Comedy Book', 'Funny book', 15.0, 3);
 
 insert into customer(name, lastname, email, password) 
 values
