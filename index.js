@@ -1,6 +1,6 @@
 import express from "express";
-import { getProductById, getProducts } from "./services/product.service.js";
-import { getCategoryByName } from "./services/category.service.js";
+import { getProductById, getProducts } from "./src/services/product.service.js";
+import { getCategoryByName } from "./src/services/category.service.js";
 const app = express();
 const port = 3000;
 
