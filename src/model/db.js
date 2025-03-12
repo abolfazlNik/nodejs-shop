@@ -12,6 +12,15 @@ const client = new Client({
     port: process.env.PGPORT,
   })
 
-await client.connect()
+  (async () => {
+    try {
+        await client.connect();
+        console.log("Connected to PostgreSQL database successfully!");
+    } catch (error) {
+        console.error("Failed to connect to PostgreSQL:", error);
+        process.exit(1);
+    }
+})();
 
 export {client}
+
